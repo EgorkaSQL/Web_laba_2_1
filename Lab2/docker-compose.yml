@@ -1,0 +1,12 @@
+networks:
+  it-mo:
+
+services:
+
+
+
+  wildfly:
+    build:
+      context: .
+    ports:
+      - "80:8080"
