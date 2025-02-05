@@ -232,23 +232,26 @@ function badMessage(message) {
 }
 
 function sendPointToServer(x, y, r) {
-    const numX = parseFloat(x);
-    const numY = parseFloat(y);
-    const numR = parseFloat(r);
     fetch('/check', {
-         method: 'POST',
-         headers: {
-             'Content-Type': 'application/json',
-         },
-         body: JSON.stringify({ x: numX, y: numY, r: numR })
-     })
-    .then(response => response.json())
-    .then(data => {
-        addTableRow(numR, numX, numY, data.status, data.currentTime, data.execTime);
-        plotPointOnCanvas(numX, numY, numR);
-
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        cache: "no-cache",
+        body: JSON.stringify({ x: x, y: y, r: r })
     })
-    .catch((error) => {
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        addTableRow(r, x, y, data.status, data.currentTime, data.execTime);
+        plotPointOnCanvas(x, y, r);
+    })
+    .catch(error => {
         console.error('Error:', error);
+        badMessage("Ошибка на сервере!");
     });
 }

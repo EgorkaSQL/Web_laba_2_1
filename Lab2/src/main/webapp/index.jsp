@@ -193,7 +193,7 @@
                     <label for="y-coord">Введите Y координату (-5 ... 5):</label>
                     <input type="text" id="y-coord" name="y-coord" min="-5" max="5" step="0.1" required>
                 </div>
-                <button id="submit-button">Отправить</button>
+                <button type="button" id="submit-button">Отправить</button>
             </div>
             <table class="result-table" id="results">
                 <thead>

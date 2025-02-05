@@ -20,14 +20,13 @@ public class FunctionCalc {
                 dot.getX() <= dot.getR() && dot.getY() <= dot.getR();
     }
 
-    public boolean isInTheSpot(Dot dot) throws Exception {
+    public boolean isInTheSpot(Dot dot) throws IllegalArgumentException {
         if (dot != null) {
             if (dot.getY() < -5 || dot.getY() > 5 || dot.getX() < -5 || dot.getX() > 5 || dot.getR() < 1 || dot.getR() > 5) {
-                throw new Exception("Invalid value: X, Y, or R is out of bounds");
+                throw new IllegalArgumentException("Invalid value: X, Y, or R is out of bounds");
             }
-
             return isInCircle(dot) || isInTriangle(dot) || isInRectangle(dot);
         }
-        throw new Exception("Invalid JSON data");
+        throw new IllegalArgumentException("Invalid JSON data");
     }
 }
